@@ -51,7 +51,7 @@ List of ported functions is following.
 
 ## Build information
 
-_WASM_ executable file and an environment emulator were build with the help of
+_WASM_ executable file and an environment emulator were built with the help of
 following tools.
 
 * **Windows 10 22H2** (Build 19045.3803)
