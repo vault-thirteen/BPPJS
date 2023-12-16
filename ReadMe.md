@@ -73,7 +73,7 @@ following tools.
 
 ## Tests
 
-Manual hash tests were performed using following tools:
+Manual hash tests were performed using following tools.
 
 * **Mozilla Firefox** web browser, version 120.0.1.
     * https://www.mozilla.org
