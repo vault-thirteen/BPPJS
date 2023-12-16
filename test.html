@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv=Content-Type>
+    <title>Test</title>
+    <script src="argon2.js"></script>
+    <script src="bppjs.js"></script>
+    <script src="test.js"></script>
+    <script>
+        Module['onRuntimeInitialized'] = function () {
+            console.log("WASM module has been loaded");
+            onLoad();
+        }
+    </script>
+</head>
+<body>
+<form>
+    <label for="salt">Salt</label><br/><textarea id="salt" name="salt" cols="60" rows="5"></textarea><br/>
+    <table>
+        <tr>
+            <td>
+                <label for="pwd">Password</label><br/><input type="password" id="pwd" name="pwd"/>
+            </td>
+            <td>
+                <input type="button" id="calc" name="calc" value="Calculate" onclick="calculate();"/>
+            </td>
+        </tr>
+    </table>
+    <label for="key">Key</label><br/><textarea id="key" name="key" cols="60" rows="5"></textarea><br/>
+</form>
+</body>
+</html>
