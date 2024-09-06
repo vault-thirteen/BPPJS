@@ -205,7 +205,7 @@ function makeHashKey(pwdStr, saltBA)
 
     if (saltBA.length !== SaltLengthRequired)
     {
-        throw new Error('Salt size is wrong');
+        throw new Error('Salt size is wrong: ' + saltBA.length);
     }
 
     let pwdPacked = packSymbols(pwdStr);

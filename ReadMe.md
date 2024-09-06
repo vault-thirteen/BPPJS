@@ -54,32 +54,22 @@ List of ported functions is following.
 _WASM_ executable file and an environment emulator were built with the help of
 following tools.
 
-* **Windows 10 22H2** (Build 19045.3803)
-    * https://www.microsoft.com
+* **Custom Emscripten Docker container**
+    * https://github.com/vault-thirteen/argon2?tab=readme-ov-file#building-for-wasm-in-emscripten-docker-container
 
 
-* **MSYS2** (Release 2023-10-26)
-    * https://www.msys2.org
-
-
-* **CMake**, **Make**, **GCC**
-    * mingw64/mingw-w64-x86_64-cmake 3.28.0-1
-    * mingw64/mingw-w64-x86_64-make 4.4-2
-    * mingw64/mingw-w64-x86_64-gcc 13.2.0-3
-
-
-* **Emscripten SDK** (Version 3.1.51)
+* **Emscripten SDK**
     * https://emscripten.org
 
 ## Tests
 
 Manual hash tests were performed using following tools.
 
-* **Mozilla Firefox** web browser, version 120.0.1.
+* **Mozilla Firefox** web browser, version 130.0.
     * https://www.mozilla.org
 
 
-* **VSFS** _HTTP_ server, version 0.10.1.
+* **VSFS** _HTTP_ server, version 0.11.8.
     * https://github.com/vault-thirteen/VSFS
 
 ## Usage
