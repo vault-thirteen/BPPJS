@@ -1,23 +1,26 @@
+// While JavaScript does not support workspaces as in C++, we add prefixes to
+// constant names as in old C. And this is year 2024 ... JavaScript must die.
+
 // Byte packing & password settings.
-const FirstSymbol = ' '; // White Space.
-const LastSymbol = '_'; // Low Line.
-const MinAllowedSymbol = FirstSymbol;
-const MaxAllowedSymbol = LastSymbol;
-const MinPasswordLength = 16;
-const SaltLengthRequired = 1024;
+const BPP_FirstSymbol = ' '; // White Space.
+const BPP_LastSymbol = '_'; // Low Line.
+const BPP_MinAllowedSymbol = BPP_FirstSymbol;
+const BPP_MaxAllowedSymbol = BPP_LastSymbol;
+const BPP_MinPasswordLength = 16;
+const BPP_SaltLengthRequired = 1024;
 
 // Settings for Argon2.
-const Argon2Iterations = 8;
-const Argon2Memory = 8 * 1024; // 8 MiB.
-const Argon2Threads = 1;
-const Argon2KeyLength = 1024;
+const BPP_Argon2Iterations = 8;
+const BPP_Argon2Memory = 8 * 1024; // 8 MiB.
+const BPP_Argon2Threads = 1;
+const BPP_Argon2KeyLength = 1024;
 
 // Errors and messages.
-const errArgNotString = "Argument is not a string";
-const errArgNotByteArray = "Argument is not a byte array";
-const errCountNotMultipleOfFour = "Symbols count is not multiple of four";
-const errPasswordNotValid = "Password is not valid";
-const errSaltSizeWrong = "Salt size is wrong";
+const BPP_errArgNotString = "Argument is not a string";
+const BPP_errArgNotByteArray = "Argument is not a byte array";
+const BPP_errCountNotMultipleOfFour = "Symbols count is not multiple of four";
+const BPP_errPasswordNotValid = "Password is not valid";
+const BPP_errSaltSizeWrong = "Salt size is wrong";
 
 let isString = value => typeof value === 'string';
 
@@ -25,13 +28,13 @@ let isByteArray = value => value instanceof Uint8Array;
 
 function mustBeString(s) {
     if (!isString(s)) {
-        throw new Error(errArgNotString);
+        throw new Error(BPP_errArgNotString);
     }
 }
 
 function mustBeByteArray(ba) {
     if (!isByteArray(ba)) {
-        throw new Error(errArgNotByteArray);
+        throw new Error(BPP_errArgNotByteArray);
     }
 }
 
@@ -59,12 +62,12 @@ function isPasswordAllowed(pwd) {
         return false;
     }
 
-    if (len < MinPasswordLength) {
+    if (len < BPP_MinPasswordLength) {
         return false;
     }
 
     [...pwd].forEach(c => {
-        if ((c < MinAllowedSymbol) || (c > MaxAllowedSymbol)) {
+        if ((c < BPP_MinAllowedSymbol) || (c > BPP_MaxAllowedSymbol)) {
             return false;
         }
     });
@@ -75,12 +78,12 @@ function isPasswordAllowed(pwd) {
 function packSymbols(symbols) {
     let len = symbols.length;
     if ((len % 4) !== 0) {
-        throw new Error(errCountNotMultipleOfFour);
+        throw new Error(BPP_errCountNotMultipleOfFour);
     }
 
     let unpackedBytes = [];
     let n = 0;
-    let fscc = FirstSymbol.charCodeAt(0);
+    let fscc = BPP_FirstSymbol.charCodeAt(0);
     [...symbols].forEach(c => {
         unpackedBytes.push(c.charCodeAt(0) - fscc);
     });
@@ -188,14 +191,14 @@ function makeHashKey(pwdStr, saltBA) {
     mustBeByteArray(saltBA);
 
     if (!isPasswordAllowed(pwdStr)) {
-        throw new Error(errPasswordNotValid);
+        throw new Error(BPP_errPasswordNotValid);
     }
 
-    if (saltBA.length !== SaltLengthRequired) {
-        throw new Error(errSaltSizeWrong + ": " + saltBA.length);
+    if (saltBA.length !== BPP_SaltLengthRequired) {
+        throw new Error(BPP_errSaltSizeWrong + ": " + saltBA.length);
     }
 
     let pwdPacked = packSymbols(pwdStr);
 
-    return argon2id_hash_raw(Argon2Iterations, Argon2Memory, Argon2Threads, pwdPacked, saltBA, Argon2KeyLength);
+    return argon2id_hash_raw(BPP_Argon2Iterations, BPP_Argon2Memory, BPP_Argon2Threads, pwdPacked, saltBA, BPP_Argon2KeyLength);
 }
