@@ -60,17 +60,17 @@ following tools.
 
 * **Emscripten SDK**
     * https://emscripten.org
-    * Version 3.1.66
+    * Version 4.0.19
 
 ## Tests
 
 Manual hash tests were performed using following tools.
 
-* **Mozilla Firefox** web browser, version 130.0.
+* **Mozilla Firefox** web browser, version 144.0.2.
     * https://www.mozilla.org
 
 
-* **VSFS** _HTTP_ server, version 0.11.10.
+* **VSFS** _HTTP_ server, version 0.11.17.
     * https://github.com/vault-thirteen/VSFS
 
 ## Usage
